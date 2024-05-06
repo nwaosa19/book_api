@@ -4,7 +4,12 @@ from sqlalchemy.orm import Session
 from models import Book, SessionLocal, engine
 from schemas import Book, BookCreate, BookUpdate
 
-app = FastAPI()
+app = app = FastAPI(
+    title="Book Management API",
+    description="A simple API for managing a book collection",
+    openapi_url="/openapi.json",
+    docs_url="/docs",
+)
 
 # Dependency for database session
 def get_db():
@@ -27,7 +32,7 @@ def get_book(book_id: int, db: Session = Depends(get_db)):
   return book
 
 @app.post("/books", response_model=Book, status_code=status.HTTP_201_CREATED)
-def create_book(book: BookCreate,db: Session = Depends(get_db)):
+def create_book(book: BookCreate, db: Session = Depends(get_db)):
   new_book = Book(**book.dict())
   db.add(new_book)
   db.commit()
