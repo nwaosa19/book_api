@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary  # Optional, for PostgreSQL connection
+python-dotenv  # Optional, for environment variables (database connection details)
