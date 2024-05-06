@@ -27,7 +27,7 @@ def get_book(book_id: int, db: Session = Depends(get_db)):
   return book
 
 @app.post("/books", response_model=Book, status_code=status.HTTP_201_CREATED)
-def create_book(book: BookCreate, db: Session = Depends(get_db)):
+def create_book(book: BookCreate,db: Session = Depends(get_db)):
   new_book = Book(**book.dict())
   db.add(new_book)
   db.commit()
